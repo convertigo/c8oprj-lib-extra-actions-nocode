@@ -1,6 +1,28 @@
 ↑default: true
+comment: |
+  '{
+      "fr": {
+          "displayName": "c8oforms_response_fs",
+          "comment": "<div>Connecteur Fullsync de la base des réponses des formulaires du Studio No Code</div>"
+      },
+      "en": {
+          "displayName": "c8oforms_response_fs",
+          "comment": "<div>The No Code Studio Fullsync connector of the form responses database</div>"
+      }
+  }'
 databaseName: c8oforms_response_fs
 ↓count_responses_view [transactions.couchdb.GetViewTransaction]: 
+  comment: |
+    '{
+        "fr": {
+            "displayName": "count_responses_view",
+            "comment": "<div>Vue retournant le nombre de réponses pour une version spécifique d''un formulaire</div>"
+        },
+        "en": {
+            "displayName": "count_responses_view",
+            "comment": "<div>Number of form responses for a specific version</div>"
+        }
+    }'
   p_ddoc: gv_c8o_tools
   p_view: count_responses
   ↓Test_Case [core.TestCase]: 
@@ -8,15 +30,56 @@ databaseName: c8oforms_response_fs
       description: (string) – Return only documents that match the specified key. Optional
       value: '["published_1661530034197", "2"]'
   ↓_use_key [variables.RequestableVariable-1664274918454]: 
+    comment: |
+      '{
+          "fr": {
+              "displayName": "_use_key",
+              "comment": "<div>Tableau contenant l''id du formulaire de réponse et son numéro de version</div>"
+          },
+          "en": {
+              "displayName": "_use_key",
+              "comment": "<div>Array containing the id of the response form and the version number</div>"
+          }
+      }'
     description: (string) – Return only documents that match the specified key. Optional
-↓GetDocument [transactions.couchdb.GetDocumentTransaction]: 
-  ↓_use_docid [variables.RequestableVariable-1664286515147]: 
-    description: Document ID
 ↓GetServerInfo [transactions.couchdb.GetServerInfoTransaction]: 
   ↑default: true
+  comment: |
+    '{
+        "fr": {
+            "displayName": "GetServerInfo",
+            "comment": "<div>Transaction Fullsync par défaut donnant la version du Server CouchDB utilisé</div>"
+        },
+        "en": {
+            "displayName": "GetServerInfo",
+            "comment": "<div>Default Fullsync transaction giving the CouchDB Server version</div>"
+        }
+    }'
 ↓PostDocument [transactions.couchdb.PostDocumentTransaction]: 
+  comment: |
+    '{
+        "fr": {
+            "displayName": "PostDocument",
+            "comment": "<div>Met à jour le formulaire de réponse en conservant l''ACL</div>"
+        },
+        "en": {
+            "displayName": "PostDocument",
+            "comment": "<div>Update form response keeping original ACL</div>"
+        }
+    }'
   fullSyncAclPolicy: noOp
   ↓data [variables.RequestableVariable-1664287433823]: 
+    comment: |
+      '{
+          "fr": {
+              "displayName": "data",
+              "comment": "<div>Réponse complète du formulaire</div>"
+          },
+          "en": {
+              "displayName": "data",
+              "comment": "<div>Complete form doc response</div>"
+          }
+      }'
     description: Document content
 ↓gv_c8o_tools [couchdb.DesignDocument]: 
   docdata: 

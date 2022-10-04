@@ -3,6 +3,10 @@ comment: |
       "fr": {
           "displayName": "Compteur de réponses du formulaire",
           "comment": "<div>Comptabilise le nombre de réponses pour le formulaire et remplit un champ technique invisible nommé ''<b>index</b>'' (à ajouter dans votre formulaire) avec cette valeur. A placer en toute première action. Peut être utilisé pour l''export CSV et/ou l''action d''envoi par mail.</div>"
+      },
+      "en": {
+          "displayName": "Responses form counter",
+          "comment": "<div>Count form responses. The form has to integrate an invisible Input component named ''<b>index</b>''. This must be the first form action. The index value will be updated in the form response when submitted and can be used for CSV export or in email action using the ''<b>__c8o_index</b>'' pattern</div>"
       }
   }'
 ↓init_vars [steps.SimpleStep-1664353876395]: 
@@ -313,6 +317,10 @@ comment: |
         "fr": {
             "displayName": "originalDoc",
             "comment": "<div>Document originel du formulaire</div>"
+        },
+        "en": {
+            "displayName": "originalDoc",
+            "comment": "<div>Original form document</div>"
         }
     }'
 ↓doc [variables.RequestableVariable-1664200148715]: 
@@ -321,5 +329,9 @@ comment: |
         "fr": {
             "displayName": "doc",
             "comment": "<div>Réponses du formulaire</div>"
+        },
+        "en": {
+            "displayName": "doc",
+            "comment": "<div>Form responses</div>"
         }
     }'

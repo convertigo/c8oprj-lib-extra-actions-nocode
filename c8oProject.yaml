@@ -1,8 +1,16 @@
 ↑convertigo: 7.9.0.m006
 ↓lib_extra_actions_c8oforms [core.Project]: 
-  comment: Extra Convertigo actions for No Code Studio.
+  comment: |
+    '{
+        "fr": {
+            "displayName": "lib_extra_actions_c8oforms",
+            "comment": "<div>Actions Convertigo supplémentaires pour le Studio No Code</div>"
+        },
+        "en": {
+            "displayName": "lib_extra_actions_c8oforms",
+            "comment": "<div>Extra Convertigo actions for No Code Studio.</div>"
+        }
+    }'
   version: 1.0
   ↓c8oforms_response_fs [connectors.FullSyncConnector]: 🗏 connectors/c8oforms_response_fs.yaml
-  ↓form_actions [sequences.GenericSequence]: 🗏 sequences/form_actions.yaml
-  ↓forms_dev [sequences.GenericSequence]: 🗏 sequences/forms_dev.yaml
   ↓forms_total_responses [sequences.GenericSequence]: 🗏 sequences/forms_total_responses.yaml

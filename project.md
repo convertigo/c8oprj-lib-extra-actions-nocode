@@ -106,7 +106,7 @@ comment
 <img src="https://github.com/convertigo/convertigo/blob/develop/engine/src/com/twinsoft/convertigo/beans/variables/images/variable_color_16x16.png?raw=true "  alt="RequestableVariable" >&nbsp;doc
 </td>
 <td>
-<div>Réponses du formulaire</div>
+<div>Form responses</div>
 </td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@ comment
 <img src="https://github.com/convertigo/convertigo/blob/develop/engine/src/com/twinsoft/convertigo/beans/variables/images/variable_color_16x16.png?raw=true "  alt="RequestableVariable" >&nbsp;originalDoc
 </td>
 <td>
-<div>Document originel du formulaire</div>
+<div>Original form document</div>
 </td>
 </tr>
 </table>

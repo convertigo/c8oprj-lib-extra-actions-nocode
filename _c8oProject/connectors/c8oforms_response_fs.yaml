@@ -12,6 +12,7 @@ comment: |
   }'
 databaseName: c8oforms_response_fs
 ↓count_responses_view [transactions.couchdb.GetViewTransaction]: 
+  accessibility: Public
   comment: |
     '{
         "fr": {
@@ -44,6 +45,7 @@ databaseName: c8oforms_response_fs
     description: (string) – Return only documents that match the specified key. Optional
 ↓GetServerInfo [transactions.couchdb.GetServerInfoTransaction]: 
   ↑default: true
+  accessibility: Public
   comment: |
     '{
         "fr": {
@@ -56,6 +58,7 @@ databaseName: c8oforms_response_fs
         }
     }'
 ↓PostDocument [transactions.couchdb.PostDocumentTransaction]: 
+  accessibility: Public
   comment: |
     '{
         "fr": {

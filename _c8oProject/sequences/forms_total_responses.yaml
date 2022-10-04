@@ -1,0 +1,325 @@
+comment: |
+  '{
+      "fr": {
+          "displayName": "Compteur de réponses du formulaire",
+          "comment": "<div>Comptabilise le nombre de réponses pour le formulaire et remplit un champ technique invisible nommé ''<b>index</b>'' (à ajouter dans votre formulaire) avec cette valeur. A placer en toute première action. Peut être utilisé pour l''export CSV et/ou l''action d''envoi par mail.</div>"
+      }
+  }'
+↓init_vars [steps.SimpleStep-1664353876395]: 
+  expression: |
+    has_resp_index = false;
+    has_actions_index = false;
+↓Input_variables [steps.InputVariablesStep-1664204424702]: 
+↓IfExistThenElse [steps.IfExistThenElseStep-1664206410577]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1664204424702
+        - java.lang.String: 
+          - ↑value: ./doc/formId
+  ↓jThen [steps.ThenStep-1664206411067]: 
+    ↓wait [steps.SimpleStep-1664276555306]: 
+      expression: java.lang.Thread.sleep(2000);
+    ↓Concat [steps.XMLConcatStep-1664273351506]: 
+      nodeName: key
+      output: false
+      separator: 
+      sourcesDefinition: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+          - com.twinsoft.convertigo.beans.common.XMLVector: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: txt
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: '["'
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: formId
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                    - java.lang.String: 
+                      - ↑value: 1664204424702
+                    - java.lang.String: 
+                      - ↑value: ./doc/formId/text()
+                - java.lang.String: 
+                  - ↑value: ''
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: txt
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: '","'
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: version
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                    - java.lang.String: 
+                      - ↑value: 1664204424702
+                    - java.lang.String: 
+                      - ↑value: ./doc/version/text()
+                - java.lang.String: 
+                  - ↑value: ''
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: txt
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: '"]'
+    ↓Call_Transaction [steps.TransactionStep-1664199841234]: 
+      sourceTransaction: lib_extra_actions_c8oforms.c8oforms_response_fs.count_responses_view
+      ↓_use_key [variables.StepVariable-1664274996077]: 
+        description: (string) – Return only documents that match the specified key. Optional
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1664273351506
+              - java.lang.String: 
+                - ↑value: ./text()
+    ↓jSimpleSource [steps.SimpleSourceStep-1664199872894]: 
+      sourceDefinition: 
+        - xmlizable: 
+          - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+          - com.twinsoft.convertigo.beans.common.XMLVector: 
+            - java.lang.String: 
+              - ↑value: 1664199841234
+            - java.lang.String: 
+              - ↑value: ./document/couchdb_output/rows/@length
+      variableName: rows
+    ↓jIfThenElse [steps.IfThenElseStep-1664199872897]: 
+      condition: rows*1>0
+      ↓jThen [steps.ThenStep-1664199872900]: 
+        ↓jSimpleSource [steps.SimpleSourceStep-1664199872903]: 
+          sourceDefinition: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: 1664199841234
+                - java.lang.String: 
+                  - ↑value: ./document/couchdb_output/rows/item/value/text()
+          variableName: current_sum
+        ↓sum [steps.SimpleStep-1664205960546]: 
+          expression: sum=""+(current_sum++);
+        ↓Iterator_c8ohash [steps.IteratorStep-1664353952515]: 
+          sourceDefinition: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: 1664204424702
+                - java.lang.String: 
+                  - ↑value: ./doc/_c8oHash
+          ↓remove_c8oHash [steps.SimpleStep-1664353952518]: 
+            expression: item.getParentNode().removeChild(item);
+        ↓Iterator_index [steps.IteratorStep-1664353952521]: 
+          sourceDefinition: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: 1664204424702
+                - java.lang.String: 
+                  - ↑value: ./doc/resp/index/value
+          ↓replace_index [steps.SimpleStep-1664353952524]: 
+            expression: |
+              item.setTextContent(sum);
+              has_resp_index = true;
+        ↓Iterator_c8o_index [steps.IteratorStep-1664291663624]: 
+          sourceDefinition: 
+            - xmlizable: 
+              - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+              - com.twinsoft.convertigo.beans.common.XMLVector: 
+                - java.lang.String: 
+                  - ↑value: 1664204424702
+                - java.lang.String: 
+                  - ↑value: ./doc/actions/submit//*[contains(text(),'__c8o_index')]
+          ↓jElement [steps.ElementStep-1664291663627]: 
+            expression: item.getTextContent()
+            output: false
+          ↓replace_doc [steps.SimpleStep-1664291663630]: 
+            expression: |
+              item.setTextContent(item.getTextContent().replace("__c8o_index", sum));
+              has_actions_index = true;
+        ↓jIf [steps.IfStep-1664354379382]: 
+          condition: has_resp_index == true || has_actions_index == true
+          ↓Call_Transaction [steps.TransactionStep-1664291867728]: 
+            sourceTransaction: lib_extra_actions_c8oforms.c8oforms_response_fs.PostDocument
+            ↓data [variables.StepVariable-1664291867731]: 
+              description: Document content
+              sourceDefinition: 
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                    - java.lang.String: 
+                      - ↑value: 1664204424702
+                    - java.lang.String: 
+                      - ↑value: ./doc/*
+          ↓IfIsInThenElse [steps.IsInThenElseStep-1664207289190]: 
+            sourceDefinition: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                - com.twinsoft.convertigo.beans.common.XMLVector: 
+                  - java.lang.String: 
+                    - ↑value: 1664291867728
+                  - java.lang.String: 
+                    - ↑value: ./document/couchdb_output/ok/text()
+            testDefinition: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                - com.twinsoft.convertigo.beans.common.XMLVector: 
+                  - xmlizable: 
+                    - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                    - com.twinsoft.convertigo.beans.common.XMLVector: 
+                      - java.lang.String: 
+                        - ↑value: AND
+                      - java.lang.String: 
+                        - ↑value: true
+            ↓jThen [steps.ThenStep-1664207290795]: 
+              ↓status [steps.XMLElementStep-1664207353651]: 
+                nodeName: status
+                nodeText: Document successfully updated
+                ↓Attribute [steps.XMLAttributeStep-1664207353654]: 
+                  nodeName: type
+                  nodeText: success
+                ↓doc_formid [steps.XMLAttributeStep-1664208163814]: 
+                  nodeName: doc_formid
+                  sourceDefinition: 
+                    - xmlizable: 
+                      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                      - com.twinsoft.convertigo.beans.common.XMLVector: 
+                        - java.lang.String: 
+                          - ↑value: 1664204424702
+                        - java.lang.String: 
+                          - ↑value: ./doc/formId/text()
+                ↓doc_id [steps.XMLAttributeStep-1664267252016]: 
+                  nodeName: doc_respid
+                  sourceDefinition: 
+                    - xmlizable: 
+                      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                      - com.twinsoft.convertigo.beans.common.XMLVector: 
+                        - java.lang.String: 
+                          - ↑value: 1664204424702
+                        - java.lang.String: 
+                          - ↑value: ./doc/_id/text()
+            ↓jElse [steps.ElseStep-1664207290797]: 
+              ↓status [steps.XMLElementStep-1664207332782]: 
+                nodeName: status
+                nodeText: Can not update document
+                ↓Attribute [steps.XMLAttributeStep-1664207332785]: 
+                  nodeName: type
+                  nodeText: error
+                ↓doc_formid [steps.XMLAttributeStep-1664208162702]: 
+                  nodeName: doc_formid
+                  sourceDefinition: 
+                    - xmlizable: 
+                      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                      - com.twinsoft.convertigo.beans.common.XMLVector: 
+                        - java.lang.String: 
+                          - ↑value: 1664204424702
+                        - java.lang.String: 
+                          - ↑value: ./doc/formId/text()
+                ↓doc_id [steps.XMLAttributeStep-1664267248896]: 
+                  nodeName: doc_respid
+                  sourceDefinition: 
+                    - xmlizable: 
+                      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                      - com.twinsoft.convertigo.beans.common.XMLVector: 
+                        - java.lang.String: 
+                          - ↑value: 1664204424702
+                        - java.lang.String: 
+                          - ↑value: ./doc/_id/text()
+      ↓jElse [steps.ElseStep-1664199872906]: 
+        ↓status [steps.XMLElementStep-1664207708515]: 
+          nodeName: status
+          nodeText: No document
+          ↓Attribute [steps.XMLAttributeStep-1664207708518]: 
+            nodeName: type
+            nodeText: error
+          ↓doc_formid [steps.XMLAttributeStep-1664208161005]: 
+            nodeName: doc_formid
+            sourceDefinition: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                - com.twinsoft.convertigo.beans.common.XMLVector: 
+                  - java.lang.String: 
+                    - ↑value: 1664204424702
+                  - java.lang.String: 
+                    - ↑value: ./doc/formId/text()
+          ↓doc_id [steps.XMLAttributeStep-1664267242476]: 
+            nodeName: doc_respid
+            sourceDefinition: 
+              - xmlizable: 
+                - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                - com.twinsoft.convertigo.beans.common.XMLVector: 
+                  - java.lang.String: 
+                    - ↑value: 1664204424702
+                  - java.lang.String: 
+                    - ↑value: ./doc/_id/text()
+  ↓jElse [steps.ElseStep-1664206411069]: 
+    ↓status [steps.XMLElementStep-1664206465904]: 
+      nodeName: status
+      nodeText: '''formId'' key does not exist'
+      ↓Attribute [steps.XMLAttributeStep-1664206483782]: 
+        nodeName: type
+        nodeText: error
+      ↓doc_formid [steps.XMLAttributeStep-1664208094470]: 
+        nodeName: doc_formid
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1664204424702
+              - java.lang.String: 
+                - ↑value: ./doc/formId/text()
+      ↓doc_id [steps.XMLAttributeStep-1664267199233]: 
+        nodeName: doc_respid
+        sourceDefinition: 
+          - xmlizable: 
+            - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+            - com.twinsoft.convertigo.beans.common.XMLVector: 
+              - java.lang.String: 
+                - ↑value: 1664204424702
+              - java.lang.String: 
+                - ↑value: ./doc/_id/text()
+↓originalDoc [variables.RequestableVariable-1664200148712]: 
+  comment: |
+    '{
+        "fr": {
+            "displayName": "originalDoc",
+            "comment": "<div>Document originel du formulaire</div>"
+        }
+    }'
+↓doc [variables.RequestableVariable-1664200148715]: 
+  comment: |
+    '{
+        "fr": {
+            "displayName": "doc",
+            "comment": "<div>Réponses du formulaire</div>"
+        }
+    }'

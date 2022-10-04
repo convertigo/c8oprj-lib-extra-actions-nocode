@@ -1,0 +1,52 @@
+↓init_vars [steps.SimpleStep-1664353261018]: 
+  expression: |
+    has_resp_index = false;
+    has_actions_index = false;
+↓Input_variables [steps.InputVariablesStep-1664285613665]: 
+↓Iterator_c8ohash [steps.IteratorStep-1664353194821]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1664285613665
+        - java.lang.String: 
+          - ↑value: ./doc/_c8oHash
+  ↓remove_c8oHash [steps.SimpleStep-1664294174892]: 
+    expression: item.getParentNode().removeChild(item);
+↓Iterator_index [steps.IteratorStep-1664292243542]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1664285613665
+        - java.lang.String: 
+          - ↑value: ./doc/resp/index/value
+  ↓replace_index [steps.SimpleStep-1664292187662]: 
+    expression: item.setTextContent("1527");
+↓Iterator__c8o_index [steps.IteratorStep-1664286865376]: 
+  sourceDefinition: 
+    - xmlizable: 
+      - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+      - com.twinsoft.convertigo.beans.common.XMLVector: 
+        - java.lang.String: 
+          - ↑value: 1664285613665
+        - java.lang.String: 
+          - ↑value: ./doc/actions/submit//*[contains(text(),'__c8o_index')]
+  ↓Sequence_JS [steps.SimpleStep-1664287228521]: 
+    expression: item.setTextContent(item.getTextContent().replace("__c8o_index", "TOTO"));
+↓Call_Transaction [steps.TransactionStep-1664287466369]: 
+  sourceTransaction: lib_extra_actions_c8oforms.c8oforms_response_fs.PostDocument
+  ↓data [variables.StepVariable-1664287466371]: 
+    description: Document content
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1664285613665
+          - java.lang.String: 
+            - ↑value: ./doc/*
+↓originalDoc [variables.RequestableVariable-1664285599135]: 
+↓doc [variables.RequestableVariable-1664285599138]: 

@@ -1,0 +1,48 @@
+↑default: true
+databaseName: c8oforms_response_fs
+↓count_responses_view [transactions.couchdb.GetViewTransaction]: 
+  p_ddoc: gv_c8o_tools
+  p_view: count_responses
+  ↓Test_Case [core.TestCase]: 
+    ↓_use_key [variables.TestCaseVariable-1664274929300]: 
+      description: (string) – Return only documents that match the specified key. Optional
+      value: '["published_1661530034197", "2"]'
+  ↓_use_key [variables.RequestableVariable-1664274918454]: 
+    description: (string) – Return only documents that match the specified key. Optional
+↓GetDocument [transactions.couchdb.GetDocumentTransaction]: 
+  ↓_use_docid [variables.RequestableVariable-1664286515147]: 
+    description: Document ID
+↓GetServerInfo [transactions.couchdb.GetServerInfoTransaction]: 
+  ↑default: true
+↓PostDocument [transactions.couchdb.PostDocumentTransaction]: 
+  fullSyncAclPolicy: noOp
+  ↓data [variables.RequestableVariable-1664287433823]: 
+    description: Document content
+↓gv_c8o_tools [couchdb.DesignDocument]: 
+  docdata: 
+    →: |
+      '{
+        "_id": "_design\/gv_c8o_tools",
+        "filters": {},
+        "updates": {},
+        "views": {
+          "count_responses": {
+            "map": "function (doc) {\r\n
+          try {\r\n
+              if(doc.formId)\r\n
+                  emit([doc.formId, doc.version], 1);\r\n
+          } catch (err) {\r\n
+              log(err.message);\r\n
+          }\r\n
+      }",
+            "reduce": "function (keys, values, rereduce) {\r\n
+          try {\r\n
+              \/\/return values.length;\r\n
+              return sum(values);\r\n
+          } catch (err) {\r\n
+              log(err.message);\r\n
+          }\r\n
+      }"
+          }
+        }
+      }'

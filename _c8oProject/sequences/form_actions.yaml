@@ -1,0 +1,18 @@
+↓Call_Transaction [steps.TransactionStep-1664286559626]: 
+  sourceTransaction: lib_extra_actions_c8oforms.c8oforms_response_fs.GetDocument
+  ↓_use_docid [variables.StepVariable-1664286559628]: 
+    description: Document ID
+    value: test
+↓Call_Sequence [steps.SequenceStep-1664286638880]: 
+  output: true
+  sourceSequence: lib_extra_actions_c8oforms.forms_dev
+  ↓originalDoc [variables.StepVariable-1664286638882]: 
+  ↓doc [variables.StepVariable-1664286638884]: 
+    sourceDefinition: 
+      - xmlizable: 
+        - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+        - com.twinsoft.convertigo.beans.common.XMLVector: 
+          - java.lang.String: 
+            - ↑value: 1664286559626
+          - java.lang.String: 
+            - ↑value: ./document/couchdb_output/*

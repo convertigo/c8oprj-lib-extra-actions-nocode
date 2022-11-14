@@ -183,6 +183,16 @@ comment: |
                       - ↑value: 1664204424702
                     - java.lang.String: 
                       - ↑value: ./doc/*
+            ↓_c8oAcl [variables.StepVariable-1668420384695]: 
+              description: Set the owner of the document if the "Acl Policy"="From _c8oACL variable"
+              sourceDefinition: 
+                - xmlizable: 
+                  - ↑classname: com.twinsoft.convertigo.beans.common.XMLVector
+                  - com.twinsoft.convertigo.beans.common.XMLVector: 
+                    - java.lang.String: 
+                      - ↑value: 1664204424702
+                    - java.lang.String: 
+                      - ↑value: ./doc/_c8oAcl
           ↓IfIsInThenElse [steps.IsInThenElseStep-1664207289190]: 
             sourceDefinition: 
               - xmlizable: 

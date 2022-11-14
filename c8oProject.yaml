@@ -1,4 +1,4 @@
-↑convertigo: 8.0.0.m006
+↑convertigo: 7.9.0.m006
 ↓lib_extra_actions_c8oforms [core.Project]: 
   comment: |
     '{
@@ -11,6 +11,6 @@
             "comment": "<div>Extra Convertigo actions for No Code Studio.</div>"
         }
     }'
-  version: 1.0
+  version: 1.0.1
   ↓c8oforms_response_fs [connectors.FullSyncConnector]: 🗏 connectors/c8oforms_response_fs.yaml
   ↓forms_total_responses [sequences.GenericSequence]: 🗏 sequences/forms_total_responses.yaml
